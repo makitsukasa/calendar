@@ -15,21 +15,26 @@ render = function(year, month) {
 
 // 年、月が書き変わったときに再表示する
 rerender = function() {
-	var year = parseInt(document.getElementById("year").value);
-	var month = parseInt(document.getElementById("month").value);
+	var yearElement = document.getElementById("year");
+	var monthElement = document.getElementById("month");
+	var year = parseInt(yearElement.value);
+	var month = parseInt(monthElement.value);
+
+	// 年を最大値と最小値でclamp
+	year = Math.min(Math.max(year, yearElement.min), yearElement.max);
 
 	// 1月のときに月を1減らすボタンを押したら前の年の12月を表示する
 	if (month <= 0) {
-		if (year <= 0) {
-			year = 0;
+		if (year <= yearElement.min) {
+			year = yearElement.min;
 			month = 1;
 		} else {
 			year -= 1;
 			month = 12;
 		}
 	} else if (month >= 13) {
-		if (year >= 9999) {
-			year = 9999;
+		if (year >= yearElement.max) {
+			year = yearElement.max;
 			month = 12;
 		} else {
 			year += 1;
