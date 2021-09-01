@@ -87,8 +87,8 @@ getDayOfWeek = function(year, month, date) {
 	var m = month;
 	var q = date
 
-	var h = (q + Math.floor(((m + 1) * 26) / 10) + K + Math.floor(K / 4) + Math.floor(J / 4) - (2 * J) + 6) % 7;
-	return h;
+	var h = (q + Math.floor(((m + 1) * 26) / 10) + K + Math.floor(K / 4) + Math.floor(J / 4) - (2 * J)) % 7;
+	return (h + 6) % 7; // 日曜日が0
 }
 
 // 年、月からその月が何日まであるかを得る
